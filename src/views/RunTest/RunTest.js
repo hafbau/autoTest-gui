@@ -55,33 +55,7 @@ class RunTest extends Component {
 
         return (
             <div className="animated fadeIn">
-                {!caseToRun && <Row>
-                    <Col xs="12" sm="12" md="12" lg="12">
-                        <Card>
-                            <Input size="lg" onChange={(e) => this.handleChange(e)} name="target.type" type="select" required >
-                                <option value="">Select a test to run</option>
-                                <option value="css">CSS</option>
-                                <option value="text">Text</option>
-                                <option value="xpath">Xpath</option>
-                                <option value="linkText">Link Text</option>
-                            </Input >
-                        </Card>
-                    </Col>
-                </Row>}
-                {!!caseToRun && <Row>
-                    <Col xs="12" sm="12" md="12" lg="12">
-                        <Card>
-                            <Label>
-                                OVERALL STATUS
-                            </Label>
-                            <ProgressBar
-                                barClassName="Progress-Bar-Large"
-                                pass={undefined}
-                                done={undefined}
-                            />
-                        </Card>
-                    </Col>
-                </Row>}
+                
                 {!!caseToRun && <Row>
                     <Col xs="12" sm="12" md="6" lg="6">
                         <Card>
