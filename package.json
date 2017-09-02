@@ -1,0 +1,39 @@
+{
+  "name": "gui",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^4.0.0-alpha.6",
+    "font-awesome": "^4.7.0",
+    "node-sass-chokidar": "0.0.3",
+    "npm-run-all": "^4.0.2",
+    "react": "^15.6.1",
+    "react-addons-css-transition-group": "^15.6.0",
+    "react-addons-transition-group": "^15.6.0",
+    "react-dom": "^15.6.1",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.1.2",
+    "react-scripts": "1.0.10",
+    "react-spinners": "0.0.30",
+    "react-styleguidist": "^6.0.8",
+    "react-transition-group": "^1.2.0",
+    "reactstrap": "^4.8.0",
+    "redux": "^3.7.2",
+    "redux-persist": "^4.8.3",
+    "redux-thunk": "^2.2.0",
+    "simple-line-icons": "^2.4.1",
+    "socket.io-client": "^2.0.3",
+    "superagent": "^3.5.2"
+  },
+  "scripts": {
+    "build-css": "node-sass-chokidar src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "start-js": "export PORT=8080 && react-scripts start",
+    "start": "npm-run-all -p watch-css start-js",
+    "build": "npm run build-css && react-scripts build",
+    "styleguide": "styleguidist server",
+    "styleguide:build": "styleguidist build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

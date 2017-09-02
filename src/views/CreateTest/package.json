@@ -1,0 +1,6 @@
+{
+  "name": "CreateTest",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./CreateTest.js"
+}
