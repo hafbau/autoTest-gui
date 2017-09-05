@@ -8736,9 +8736,47 @@ hr.transparent {
   *[dir="rtl"].callout-dark {
     border-right-color: #29363d; }
 
+.Media-Panel-Tab-Pane {
+  text-align: center; }
+
 /* Progress Bar Styles */
 .Progress-Bar-Large {
   height: 60px; }
 
 .Progress-Bar-Medium {
   height: 30px; }
+
+.Spinner-Container {
+  padding: 150px 0; }
+
+.Spinner-Container > div > div {
+  margin: 0 auto; }
+
+.Status-Icon {
+  font-size: 12rem;
+  padding: 100px 0 50px;
+  text-align: center; }
+
+.borderless {
+  border: none; }
+
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.4 !important;
+  pointer-events: none; }
+
+.pass {
+  color: #4dbd74; }
+
+.fail {
+  color: #f86c6b; }
+
+.loading-label {
+  align-items: center;
+  display: flex; }
+
+.results {
+  list-style: none; }
+
+.result-item {
+  line-height: 2; }

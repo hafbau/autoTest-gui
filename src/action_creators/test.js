@@ -1,6 +1,4 @@
-import React from "react";
 import testApi from "../api/test";
-import { Redirect } from "react-router-dom";
 
 export function saveAndRun(body, token) {
     return function(dispatch) {

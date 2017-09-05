@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { HashSpinner } from 'react-spinners';
+import { HashLoader } from 'react-spinners';
 
-class RunState extends Component {
+class Spinner extends Component {
     constructor(props) {
         super(props)
         this.state = {}
@@ -9,12 +9,11 @@ class RunState extends Component {
 
     render() {
         return (
-            <div>
-                <Spinner />
-                <Result />
+            <div className="Spinner-Container">
+                <HashLoader color="#20a8d8" size={120} />
             </div>
         )
     }
 }
 
-export default RunState;
+export default Spinner;

@@ -128,7 +128,10 @@ export default (state = initialState, action) => {
         case "STEP_RESULT":
             return {
                 ...state,
-                result: action.payload
+                // payload signature is from the server
+                // TODO: consider decoupling
+                result: action.payload.result,
+                status: action.payload.status
             }
         
             default:

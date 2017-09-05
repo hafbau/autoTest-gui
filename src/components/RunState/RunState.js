@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Result, Spinner } from '../components';
+import { Result, Spinner } from '../index';
 
 class RunState extends Component {
     constructor(props) {
@@ -8,12 +8,16 @@ class RunState extends Component {
     }
 
     render() {
+        const { result, results, running, status } = this.props;
         return (
             <div>{
-                this.props.running ?
+                running ?
                     <Spinner />
                 :
-                    <Result />
+                    <Result
+                        results={results}
+                        result={result}
+                        status={status} />
             }</div>
         )
     }

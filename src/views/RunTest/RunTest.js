@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { HashLoader } from 'react-spinners';
 import {
     Button,
     Col,
@@ -6,12 +7,10 @@ import {
     CardBlock,
     CardFooter,
     CardHeader,
-    Input,
-    Label,
     Row
 } from "reactstrap";
 
-import RunState from '../../components/ProgressBar/';
+import { MediaPanel, RunState } from '../../components';
 
 // for dev testing
 import { fakeCase, fakeRun } from '../../api';
@@ -20,38 +19,63 @@ class RunTest extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            incr: 5,
-            loopTime: 500,
-            maxPercent: 90,
-            percent: 0,
-            case: this.props.case || fakeCase // fakeCase to be removed post dev test
+            case: this.props.runningCase || fakeCase, // fakeCase to be removed post dev test
+            results: []
         };
 
         
     }
 
     componentDidMount() {
-        if (this.state.case) {
+        if (this.state.case && !this.props.running) {
+            // bind props.run from app container `Blayk`
             if (typeof this.props.run === "function") this.props.run(this.state.case)
-            fakeRun(this.state.case, (result) => this.handleResult(result)) // fakeRun to be removed
+            fakeRun(this.state.case, (result, status) => this.handleResult(result, status)) // fakeRun to be removed
     
         }
     }
 
     componentWillReceiveProps(nextProps) {
-        // this is where handleResult will be called
+        // should check if result is already being handled
+        if (nextProps.result &&
+            ((this.state.result &&
+                nextProps.result.stepOrder !== this.state.result.stepOrder) ||
+                !this.state.result)
+        ) this.handleResult(nextProps.result, nextProps.status)
     }
 
-    handleResult(result) {
+    createIssue() {
+        console.log("Im creating an issue")
+    }
+
+    updateIssue() {
+        console.log("Im updating an issue")
+    }
+
+    handleResult(result, status) {
         this.setState((prevState, props) => {
-            return Object.assign({}, prevState, { result })
+            const results = prevState.results;
+            results.push(result);
+            
+            return Object.assign({},
+                prevState,
+                { result, results, status }
+            )
         })
     }
 
+    runAgain() {
+        this.setState((state, props) => Object.assign({},
+            state, {result: null, results: [], status: "pending"}
+        ));
+        this.componentDidMount();
+    }
+
     render() {
-        console.log("props runned", this.props, "state result", JSON.stringify(this.state.result));
         const caseToRun = this.state.case;
         const result = this.state.result;
+        const status = this.props.status || this.state.status;
+        const isRunning = this.props.running || (status !== "done" && status !== "failed");
 
         return (
             <div className="animated fadeIn">
@@ -63,25 +87,53 @@ class RunTest extends Component {
                                 Running Test Case {caseToRun.name || "unnamed"} from Test suite foo
                             </CardHeader>
 
-                            <CardBlock className="card-body">
-                                <RunState case={caseToRun} result={result} />
+                            <CardBlock className={`card-body`}>
+                                <RunState
+                                    running={isRunning}
+                                    result={result}
+                                    results={this.props.results || this.state.results}
+                                    status={status} />
 
                             </CardBlock>
 
                             <CardFooter>
+                                {result && !result.pass && caseToRun && !caseToRun.hasIssue && <Button
+                                    color="secondary"
+                                    disabled={isRunning}
+                                    onClick={() => this.createIssue()}
+                                    size="md"
+                                    type="submit"
+                                >Create Issue</Button>}
+
+                                {result && result.pass && caseToRun && caseToRun.hasIssue && <Button
+                                    color="secondary"
+                                    disabled={isRunning}
+                                    onClick={() => this.updateIssue()}
+                                    size="md"
+                                    type="submit"
+                                >Update Issue</Button>}
+
                                 <Button
                                     className="float-right"
-                                    type="submit"
-                                    size="md"
                                     color="primary"
-                                    onClick={() => this.handleSubmit()}
-                                >Run Again</Button>
+                                    disabled={isRunning}
+                                    onClick={() => this.runAgain()}
+                                    size="md"
+                                    type="submit"
+                                >{isRunning ? 
+                                    <span className="loading-label">
+                                        <HashLoader color="#fff" size={13} />
+                                        &nbsp;&nbsp;Running
+                                    </span>
+                                :
+                                    "Run Again"
+                                }</Button>
                             </CardFooter>
                         </Card>
                     </Col>
 
                     <Col xs="12" sm="12" md="6" lg="6">
-                        {result && result.image && <img src={result.image} alt="screenshot" style={{ minHeight: "200px", minWidth: "200px" }} />}
+                        <MediaPanel image={result && result.image}/>
                     </Col>
                 </Row>}
             </div>

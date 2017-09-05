@@ -1,0 +1,6 @@
+{
+  "name": "MediaPanel",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./MediaPanel.js"
+}

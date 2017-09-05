@@ -5,7 +5,7 @@ class Footer extends Component {
     return (
       <footer className="app-footer">
         <a href="/">Blayk</a> &copy; 2017 hafbau.
-        <span className="float-right">Made by <a href="#">Hafiz Suara</a></span>
+        <span className="float-right">Made by <a href="#_">Soup-a-dood</a></span>
       </footer>
     )
   }

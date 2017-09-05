@@ -22,8 +22,8 @@ export function fakeRun({ steps = [] } = fakeCase, resultReader) {
             index++;
             const status = result.pass ?
                 index < steps.length ? "pending" : "done"
-                : "terminated"
-            
+                : "failed"
+
             resultReader(result, status);
             if (result.pass) return resultEmitter();
 

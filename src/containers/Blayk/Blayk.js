@@ -17,6 +17,9 @@ import Sidebar from '../../components/Sidebar/';
 import Breadcrumb from '../../components/Breadcrumb/';
 import Footer from '../../components/Footer/';
 
+import Page404 from '../../views/Page404/';
+import Page500 from '../../views/Page500/';
+
 class App extends Component {
 
   componentWillMount() {
@@ -25,6 +28,7 @@ class App extends Component {
   }
 
   render() {
+    console.log("props in blayk", this.props)
     if (!this.props.token) return <Redirect to="/login" />
     return (
       <div className="app">
@@ -36,11 +40,13 @@ class App extends Component {
             <Container fluid>
               <Switch>
                 <Route path="/new" name="Create Test" render={() => <CreateTest {...this.props} />}/>
-                <Route path="/run" name="Run Test" render={() => <RunTest {...this.props} />}/>
+                <Route path="/run" name="Run Test" render={() => <RunTest {...this.props} />} />
+                <Route exact path="/404" name="Page 404" component={Page404} />
+                <Route exact path="/500" name="Page 500" component={Page500} />
                
                 {/* <Redirect from="/logout" to="/login"/> */}
                 {/* <Redirect from="/" to="/tests/new"/> */}
-                <Route path="/" exact name="Home" render={() => <CreateTest {...this.props} />}/>
+                <Route exact path="/" name="Home" render={() => <CreateTest {...this.props} />}/>
               </Switch>
             </Container>
           </main>

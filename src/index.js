@@ -29,11 +29,10 @@ import Blayk from './containers/Blayk/'
 // Views
 import Login from './views/Login/';
 import Register from './containers/RegisterContainer/';
-import Page404 from './views/Page404/';
-import Page500 from './views/Page500/';
 
 import registerServiceWorker from './registerServiceWorker';
 
+import config from './config';
 
 // TODO: move this to seperate file
 const store = compose(
@@ -44,11 +43,8 @@ const store = compose(
 persistStore(store);
 
 // websocket connection
-// console.log("path", API_PATH)
-const socket = io.connect("http://localhost:3000", { transports: ['websocket'], upgrade: false });
-console.log("socket in index", socket)
+const socket = io.connect(config.API_PATH, { transports: ['websocket'], upgrade: false });
 socket.on('connect', (x) => {
-    console.log("socket in index in con", socket, "arg", x)
     store.dispatch({ type: 'HAS_SOCKET', socket })
 });
 
@@ -58,8 +54,6 @@ ReactDOM.render(
             <Switch>
                 <Route exact path="/login" name="Login Page" component={Login} />
                 <Route exact path="/register" name="Register Page" component={Register} />
-                <Route exact path="/404" name="Page 404" component={Page404} />
-                <Route exact path="/500" name="Page 500" component={Page500} />
                 <Route path="/" name="Home" component={Blayk} />
             </Switch>
         </BrowserRouter>
