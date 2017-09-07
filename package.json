@@ -1,5 +1,5 @@
 {
-  "name": "gui",
+  "name": "blayk",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -35,5 +35,30 @@
     "styleguide:build": "styleguidist build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+
+  "apps": [
+    {
+      "name": "blayk",
+      "script": "react-scripts start",
+      "env": {
+        "COMMON_VARIABLE": "true"
+      },
+      "env_production": {
+        "NODE_ENV": "production"
+      }
+    }
+  ],
+ 
+  "deploy": {
+    "production": {
+      "user": "sb",
+      "host": "159.203.14.114",
+      "port": "8080",
+      "ref": "origin/master",
+      "repo": "git@github.com:hafbau/autoTest-gui.git",
+      "path": "/var/www/html",
+      "post-deploy": "npm install —production && pm2 startOrRestart package.json —env production"
+    }
   }
 }

@@ -13,13 +13,13 @@ import {
 import { MediaPanel, RunState } from '../../components';
 
 // for dev testing
-import { fakeCase, fakeRun } from '../../api';
+// import { fakeCase, fakeRun } from '../../api';
 
 class RunTest extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            case: this.props.runningCase || fakeCase, // fakeCase to be removed post dev test
+            case: this.props.runningCase,// || fakeCase, // fakeCase to be removed post dev test
             results: []
         };
 
@@ -30,7 +30,7 @@ class RunTest extends Component {
         if (this.state.case && !this.props.running) {
             // bind props.run from app container `Blayk`
             if (typeof this.props.run === "function") this.props.run(this.state.case)
-            fakeRun(this.state.case, (result, status) => this.handleResult(result, status)) // fakeRun to be removed
+            // fakeRun(this.state.case, (result, status) => this.handleResult(result, status)) // fakeRun to be removed
     
         }
     }
