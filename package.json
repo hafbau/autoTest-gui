@@ -54,8 +54,7 @@
     "production": {
       "user": "sb",
       "host": "159.203.14.114",
-      "port": "8080",
-      "key": "/home/sb/.ssh/id_rsa",
+      "port": "80",
       "ref": "origin/master",
       "repo": "git@github.com:hafbau/autoTest-gui.git",
       "path": "/var/www/html",
