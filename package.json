@@ -54,10 +54,11 @@
     "production": {
       "user": "sb",
       "host": "159.203.14.114",
-      "port": "80",
+      "port": "8080",
+      "key": "/Users/sb/.ssh/id_rsa",
       "ref": "origin/master",
       "repo": "git@github.com:hafbau/autoTest-gui.git",
-      "path": "/home/sb",
+      "path": "/var/www/html",
       "post-deploy": "npm install —production && pm2 startOrRestart package.json —env production"
     }
   }
