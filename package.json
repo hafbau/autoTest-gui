@@ -57,7 +57,7 @@
       "ref": "origin/master",
       "repo": "git@github.com:hafbau/autoTest-gui.git",
       "path": "/home/sb/blayk",
-      "post-deploy": "npm install --production && pm2 startOrRestart package.json -env production"
+      "post-deploy": "npm install && pm2 startOrRestart package.json -env production"
     }
   }
 }
