@@ -23,16 +23,21 @@ export default class Example extends React.Component {
         };
     }
 
-    componentWillReceiveProps(nextProps) {
-        const images = this.state.images;
-        if (nextProps.image && !images.includes(nextProps.image)) {
-
-            images.push(nextProps.image);
+    componentWillReceiveProps({ image, images }) {
+        
+        const stateImages = this.state.images;
+        if (!(images && images.length) && image && !stateImages.includes(image)) {
+            
+            stateImages.push(image);
             this.setState((state, props) => Object.assign({},
-                state, { images, visibleImageIndex: images.length - 1 })
+                state, { images: stateImages, visibleImageIndex: images.length - 1 })
             )
 
         }
+
+        if (images && images.length) this.setState((state, props) => Object.assign({},
+            state, { images, visibleImageIndex: images.length - 1 })
+        )
     }
 
     moveSlide(step) {

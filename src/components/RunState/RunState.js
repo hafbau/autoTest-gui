@@ -9,6 +9,7 @@ class RunState extends Component {
 
     render() {
         const { result, results, running, status } = this.props;
+        console.log("running in runstate", running, "results in run state", results);
         return (
             <div>{
                 running ?

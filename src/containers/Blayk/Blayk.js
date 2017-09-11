@@ -28,7 +28,7 @@ class App extends Component {
   }
 
   render() {
-    console.log("props in blayk", this.props)
+    // console.log("props in blayk", this.props)
     if (!this.props.token) return <Redirect to="/login" />
     return (
       <div className="app">

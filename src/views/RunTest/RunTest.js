@@ -35,13 +35,17 @@ class RunTest extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps({ result, results, status }) {
         // should check if result is already being handled
-        if (nextProps.result &&
+        if (result &&
             ((this.state.result &&
-                nextProps.result.stepOrder !== this.state.result.stepOrder) ||
+                result.stepOrder !== this.state.result.stepOrder) ||
                 !this.state.result)
-        ) this.handleResult(nextProps.result, nextProps.status)
+        ) this.handleResult(result, status)
+
+        if (results && results.length) this.setState((state, props) => Object.assign({},
+            state, { results, status: (results[results.length - 1].pass ? "done" : "terminated") })// status is based on last result
+        )
     }
 
     createIssue() {
@@ -73,9 +77,10 @@ class RunTest extends Component {
 
     render() {
         const caseToRun = this.state.case;
-        const result = this.state.result;
-        const status = this.props.status || this.state.status;
-        const isRunning = this.props.running || (status !== "done" && status !== "failed");
+        const { result, results, status } = this.state;
+        const isRunning = this.props.running// || (status !== "done" && status !== "failed");
+        console.log("props in runTest", this.props);
+        console.log("state in runTest", this.state);
 
         return (
             <div className="animated fadeIn">
@@ -91,7 +96,7 @@ class RunTest extends Component {
                                 <RunState
                                     running={isRunning}
                                     result={result}
-                                    results={this.props.results || this.state.results}
+                                    results={results}
                                     status={status} />
 
                             </CardBlock>
@@ -133,7 +138,9 @@ class RunTest extends Component {
                     </Col>
 
                     <Col xs="12" sm="12" md="6" lg="6">
-                        <MediaPanel image={result && result.image}/>
+                        <MediaPanel
+                            image={result && result.image}
+                            images={results && results.map(result => result.imageDataUrl)}/>
                     </Col>
                 </Row>}
             </div>
