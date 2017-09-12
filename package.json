@@ -40,8 +40,6 @@
   "apps": [
     {
       "name": "blayk",
-      "script": "./node_modules/react-scripts",
-      "args": "start",
       "env": {
         "COMMON_ENV_VAR": "true"
       },
