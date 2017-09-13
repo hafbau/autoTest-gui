@@ -43,6 +43,7 @@ const store = compose(
 persistStore(store);
 
 // websocket connection
+console.log("api path", config.API_PATH)
 const socket = io.connect(config.API_PATH, { transports: ['websocket'], upgrade: false });
 socket.on('connect', (x) => {
     store.dispatch({ type: 'HAS_SOCKET', socket })
